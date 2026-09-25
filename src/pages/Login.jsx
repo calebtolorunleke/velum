@@ -64,6 +64,22 @@ const Login = ({ mode = "login" }) => {
           © {new Date().getFullYear()} Velum Inc. All rights reserved.
         </div>
       </div>
+
+      {/* left auth form */}
+      <div className="md:w-1/2 p-8 md:p-12 lg:p-16 flex items-center justify-center bg-white">
+        <div className="w-full max-w-md space-y-6 animate-fade-in">
+          <div className="text-2xl font-medium text-zinc-900">
+            <h3 className="text-2xl">
+              {isRegister ? "Create and account" : "Welcome back"}
+            </h3>
+            <p>
+              {isRegister
+                ? "Enter your details below to get started with 1 GB fre storage"
+                : "Enter your credentials to access your Drive"}
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
