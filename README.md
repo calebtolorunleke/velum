@@ -1,16 +1,50 @@
-# React + Vite
+# Velum 📁✨
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> Premium, light-themed cloud file-management and encrypted storage web application.
 
-Currently, two official plugins are available:
+Velum combines clean design, fast performance, and reliable cloud infrastructure to make cloud storage feel lightweight, secure, and intuitive.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## 🎨 Brand & Visual Identity
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Primary Background:** `#FFFFFF` (Clean White)
+- **Card & Sidebar Elevation:** `#F9F6F0` (Warm Cream)
+- **Primary Text:** `#2B211B` (Rich Espresso)
+- **Accent:** `#C49A6C` (Warm Caramel)
+- **Secondary Text / Borders:** `#8C7A6B` (Muted Brown)
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🛠 Tech Stack
+
+### Frontend
+
+- **Framework:** React 19 + Vite
+- **Styling:** Tailwind CSS v4
+- **Icons:** `lucide-react`
+- **Utilities:** `axios`, `date-fns`, `react-dropzone`
+
+### Backend _(Stage 1 In Progress)_
+
+- **Runtime:** Node.js + Express
+- **Database:** PostgreSQL (`pg` connection pool)
+- **Storage:** AWS S3
+- **Authentication:** JWT (Access/Refresh Tokens) with `bcrypt` password hashing
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- **Node.js:** `v18.x` or higher
+- **npm:** `v9.x` or higher
+
+### Installation
+
+1. **Clone the repository:**
+   ```bash
+   git clone [https://github.com/calebtolorunleke/velum.git](https://github.com/calebtolorunleke/velum.git)
+   cd velum
+   ```
