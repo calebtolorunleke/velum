@@ -2,7 +2,7 @@
 
 > Premium, light-themed cloud file-management and encrypted storage web application.
 
-Velum combines clean design, fast performance, and reliable cloud infrastructure to make cloud storage feel lightweight, secure, and intuitive.
+Velum combines clean design, fast performance, and reliable cloud infrastructure, drive server to make cloud storage feel lightweight, secure, and intuitive.
 
 ---
 
