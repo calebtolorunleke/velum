@@ -1,6 +1,15 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { FolderKanbanIcon, ShieldCheckIcon, HardDriveIcon } from "lucide-react";
+import {
+  FolderKanbanIcon,
+  ShieldCheckIcon,
+  HardDriveIcon,
+  UserIcon,
+  MailIcon,
+  LockIcon,
+} from "lucide-react";
+import { Input } from "@/components/ui/Input";
+import { Button } from "@/components/ui/Button";
 
 const Login = ({ mode = "login" }) => {
   const isRegister = mode === "register";
@@ -11,6 +20,8 @@ const Login = ({ mode = "login" }) => {
 
   const updateField = (key, value) =>
     setForm((prev) => ({ ...prev, [key]: value }));
+
+  const handleSubmit = async () => {};
 
   return (
     <div className="min-h-screen text-zinc-900 flex flex-col md:flex-row">
@@ -78,6 +89,49 @@ const Login = ({ mode = "login" }) => {
                 : "Enter your credentials to access your Drive"}
             </p>
           </div>
+
+          <form onSubmit={handleSubmit} className="space-y-4">
+            {isRegister && (
+              <Input
+                label="Full Name"
+                icon={UserIcon}
+                placeholder="John Doe"
+                value={form.name}
+                onchange={(e) => updateField("name", e.target.value)}
+                required
+              />
+            )}
+            <Input
+              label="Email Addres"
+              type="email"
+              icon={MailIcon}
+              placeholder="you@example.email Doe"
+              value={form.email}
+              onchange={(e) => updateField("email", e.target.value)}
+              required
+            />
+
+            <Input
+              label="Password"
+              type="password"
+              icon={LockIcon}
+              placeholder="........."
+              value={form.email}
+              onchange={(e) => updateField("password", e.target.value)}
+              required
+            />
+
+            <Button
+              type="submit"
+              variant="primary"
+              className="w-full py-3"
+              isLoading={isLoading}
+            >
+              <span className="font-medium text-base">
+                {isRegister ? "Registered Account" : "Sign In"}
+              </span>
+            </Button>
+          </form>
         </div>
       </div>
     </div>
