@@ -20,7 +20,7 @@ const Login = ({ mode = "login" }) => {
         <div className="relative z-10 flex items-center gap-3">
           <img src="/logo.svg" alt="Velum logo" className="max-h-9" />
           <span className="text-4xl font-medium uppercase text-zinc-900">
-            Velum |
+            Velum
           </span>
         </div>
 
