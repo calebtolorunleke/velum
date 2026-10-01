@@ -10,10 +10,12 @@ import {
 } from "lucide-react";
 import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
+import { useApp } from "@/context/AppContext";
 
 const Login = ({ mode = "login" }) => {
   const isRegister = mode === "register";
   const navigate = useNavigate();
+  const { login, register } = useApp();
 
   const [form, setForm] = useState({ name: "", email: "", password: "" });
   const [isLoading, setIsLoading] = useState(false);
@@ -21,7 +23,9 @@ const Login = ({ mode = "login" }) => {
   const updateField = (key, value) =>
     setForm((prev) => ({ ...prev, [key]: value }));
 
-  const handleSubmit = async () => {};
+  const handleSubmit = async () => {
+    e.preventDedault;
+  };
 
   return (
     <div className="min-h-screen text-zinc-900 flex flex-col md:flex-row">
@@ -116,7 +120,7 @@ const Login = ({ mode = "login" }) => {
               type="password"
               icon={LockIcon}
               placeholder="........."
-              value={form.email}
+              value={form.password}
               onchange={(e) => updateField("password", e.target.value)}
               required
             />

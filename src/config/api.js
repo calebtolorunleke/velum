@@ -38,7 +38,6 @@ const saveUser = (user) => {
 const getFolders = () => currentFolders;
 const saveFolders = (folders) => {
     currentFolders = folders;
-    new currentFolders = new folders;
 };
 
 const getFiles = () => currentFiles;
