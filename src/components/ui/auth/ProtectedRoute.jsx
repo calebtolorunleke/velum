@@ -5,7 +5,7 @@ import { Spinner } from "../Spinner";
 
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticated, isLoading } = useApp();
-  const location = useLocation;
+  const location = useLocation();
 
   if (isLoading) {
     return (
@@ -16,12 +16,10 @@ const ProtectedRoute = ({ children }) => {
     );
   }
 
-  if (isAuthenticated) {
-    return <Navigate to="/login" state={{ form: location }} replace />;
+  if (!isAuthenticated) {
+    return <Navigate to="/login" state={{ from: location }} replace />;
   }
-  return children ? <> {children}</> : Outlet;
-
-  return <div></div>;
+  return children ? <> {children}</> : <Outlet />;
 };
 
 export default ProtectedRoute;

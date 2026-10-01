@@ -3,6 +3,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import Login from "./pages/Login";
 import Drive from "./pages/Drive";
+import ProtectedRoute from "./components/ui/auth/ProtectedRoute";
 
 const App = () => {
   return (
@@ -12,7 +13,10 @@ const App = () => {
         <Route element={<Login mode="login" />} path="/login" />
         <Route element={<Login mode="register" />} path="/register" />
 
-        <Route element={<Drive />} path="/" />
+        {/* private route */}
+        <Route element={<ProtectedRoute />}>
+          <Route path="/" element={<Drive />} />
+        </Route>
 
         <Route element={<Navigate to="/" replace />} path="*" />
       </Routes>
