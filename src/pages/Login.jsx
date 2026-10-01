@@ -23,15 +23,29 @@ const Login = ({ mode = "login" }) => {
   const updateField = (key, value) =>
     setForm((prev) => ({ ...prev, [key]: value }));
 
-  const handleSubmit = async () => {
-    e.preventDedault;
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    let success = false;
+    if (isRegister) {
+      success = await register(form.name, form.email, form.password);
+    } else {
+      success = await login(form.email, form.password);
+    }
+
+    setIsLoading(false);
+
+    if (success) {
+      navigate("/");
+    }
   };
 
   return (
     <div className="min-h-screen text-zinc-900 flex flex-col md:flex-row">
-      {/* ;eft hero brand panel  */}
+      {/* Left hero brand panel */}
       <div className="md:w-1/2 p-8 md:p-12 lg:p-16 bg-[#F9F6F0] border-b md:border-b-0 md:border-r border-[#E5DEC9] flex flex-col justify-between relative overflow-hidden min-h-[400px] md:min-h-screen">
-        <div className="absolute inset-0 bg-[url('/pattern.svg')]"> </div>
+        <div className="absolute inset-0 bg-[url('/pattern.svg')]"></div>
         <div className="relative z-10 flex items-center gap-3">
           <img src="/logo.svg" alt="Velum logo" className="max-h-9" />
           <span className="text-4xl font-medium uppercase text-zinc-900">
@@ -41,7 +55,6 @@ const Login = ({ mode = "login" }) => {
 
         <div className="relative z-0 my-12 space-y-6">
           <h2 className="text-3xl md:text-4xl lg:text-5xl tracking-tight text-zinc-900 leading-tight">
-            {" "}
             Secure, Simple & Fast
             <br />
             <span className="text-[#C49A6C]">Cloud Storage.</span>
@@ -80,16 +93,16 @@ const Login = ({ mode = "login" }) => {
         </div>
       </div>
 
-      {/* left auth form */}
+      {/* Right auth form */}
       <div className="md:w-1/2 p-8 md:p-12 lg:p-16 flex items-center justify-center bg-white">
         <div className="w-full max-w-md space-y-6 animate-fade-in">
-          <div className="text-2xl font-medium text-zinc-900">
-            <h3 className="text-2xl">
-              {isRegister ? "Create and account" : "Welcome back"}
+          <div className="space-y-1">
+            <h3 className="text-2xl font-medium text-zinc-900">
+              {isRegister ? "Create an account" : "Welcome back"}
             </h3>
-            <p>
+            <p className="text-sm text-zinc-500">
               {isRegister
-                ? "Enter your details below to get started with 1 GB fre storage"
+                ? "Enter your details below to get started with 1 GB free storage"
                 : "Enter your credentials to access your Drive"}
             </p>
           </div>
@@ -101,17 +114,17 @@ const Login = ({ mode = "login" }) => {
                 icon={UserIcon}
                 placeholder="John Doe"
                 value={form.name}
-                onchange={(e) => updateField("name", e.target.value)}
+                onChange={(e) => updateField("name", e.target.value)}
                 required
               />
             )}
             <Input
-              label="Email Addres"
+              label="Email Address"
               type="email"
               icon={MailIcon}
-              placeholder="you@example.email Doe"
+              placeholder="you@example.com"
               value={form.email}
-              onchange={(e) => updateField("email", e.target.value)}
+              onChange={(e) => updateField("email", e.target.value)}
               required
             />
 
@@ -119,9 +132,9 @@ const Login = ({ mode = "login" }) => {
               label="Password"
               type="password"
               icon={LockIcon}
-              placeholder="........."
+              placeholder="••••••••"
               value={form.password}
-              onchange={(e) => updateField("password", e.target.value)}
+              onChange={(e) => updateField("password", e.target.value)}
               required
             />
 
@@ -132,31 +145,31 @@ const Login = ({ mode = "login" }) => {
               isLoading={isLoading}
             >
               <span className="font-medium text-base">
-                {isRegister ? "Registered Account" : "Sign In"}
+                {isRegister ? "Register Account" : "Sign In"}
               </span>
             </Button>
           </form>
 
           <div className="text-center pt-2">
             {isRegister ? (
-              <p className="text-xs text-zinc-500">
+              <p className="text-xs text-[#8C7A6B]">
                 Already have an account?{" "}
                 <Link
                   to="/login"
-                  className="text-orange-600 font-semibold hover:underline"
+                  className="text-[#C49A6C] font-semibold hover:text-[#A87E52] transition-colors hover:underline"
                 >
                   Sign in here
-                </Link>{" "}
+                </Link>
               </p>
             ) : (
-              <p className="text-xs text-zinc-500">
+              <p className="text-xs text-[#8C7A6B]">
                 Don't have an account yet?{" "}
                 <Link
                   to="/register"
-                  className="text-orange-600 font-semibold hover:underline"
+                  className="text-[#C49A6C] font-semibold hover:text-[#A87E52] transition-colors hover:underline"
                 >
                   Create account
-                </Link>{" "}
+                </Link>
               </p>
             )}
           </div>
