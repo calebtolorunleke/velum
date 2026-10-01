@@ -10,16 +10,33 @@ import toast from "react-hot-toast";
 
 const AppContext = createContext();
 
+const ROOT_BREADCRUMB = [{ id: null, name: "My Drive" }];
+
 const getErrMsg = (err, fallBack) => err.response?.data?.error || fallBack;
 
 export const AppProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  // upload global state
+  const [isUploading, setIsUploading] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
+
+  // drive view state
+  const [currentFolderId, setCurrentFolderId] = useState(null);
+  const [breadcrumbs, setBreadcrumbs] = useState(ROOT_BREADCRUMB);
+  const [folders, setFolders] = useState([]);
+  const [files, setFiles] = useState([]);
+  const [isDriveLoading, setIsDriveLoading] = useState(false);
+
+  // filter & sort state
+  const [searchQuery, setSearchQuery] = useState("");
+  const [sortBy, setSortBy] = useState("name_asc");
+
   // refresh user profile & storage status
   const refreshUser = useCallback(async () => {
     try {
-      const data = await api.get("/api/auth/me");
+      const { data } = await api.get("/api/auth/me");
       setUser(data.user);
       return data.user;
     } catch (error) {
@@ -71,6 +88,33 @@ export const AppProvider = ({ children }) => {
     }
   };
 
+  const fetchDriveContent = useCallback(
+    async (folderId = currentFolderId, search = searchQuery, sort = sortBy) => {
+      if (!user) return;
+
+      setIsDriveLoading(true);
+      try {
+        const parentParam = folderId || "null";
+        const [folderRes, fileRes, detailRes] = await Promise.all([
+          api.get("/api/folders", { params: { parent_id: parentParam } }),
+          api.get("/api/files", {
+            params: { folder_id: parentParam, search, sort },
+          }),
+          folderId ? api.get(`/api/folders/${folderId}`) : null,
+        ]);
+
+        setFolders(folderRes.data.folders);
+        setFiles(fileRes.data.files);
+        setBreadcrumbs(detailRes?.data?.breadcrumbs || ROOT_BREADCRUMB);
+      } catch (error) {
+        toast.error("Error loading drive contents");
+      } finally {
+        setIsDriveLoading(false);
+      }
+    },
+    [user, currentFolderId, searchQuery, sortBy],
+  );
+
   const value = {
     user,
     setUser,
@@ -79,6 +123,24 @@ export const AppProvider = ({ children }) => {
     logout,
     isLoading,
     isAuthenticated: !!user,
+    isUploading,
+    setIsUploading,
+    uploadProgress,
+    setUploadProgress,
+    refreshUser,
+    currentFolderId,
+    setCurrentFolderId,
+    breadcrumbs,
+    folders,
+    setFolders,
+    files,
+    setFiles,
+    isDriveLoading,
+    fetchDriveContent,
+    searchQuery,
+    setSearchQuery,
+    sortBy,
+    setSortBy,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

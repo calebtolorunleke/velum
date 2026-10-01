@@ -1,7 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
+import { Outlet } from "react-router-dom";
 
 const DashboarrdLayout = () => {
-  return <div></div>;
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const [isCreateFolderOpen, setIsCreateFolderOpen] = useState(false);
+
+  return (
+    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col">
+      {/* sidebar  */}
+      <p>Sidebar</p>
+
+      {/* main content  */}
+      <div className="md:pl-64 flex flex-col flex-1">
+        {/* header  */}
+        <p>header</p>
+
+        <main className="flex-1 p-4 md:p-6 overflow-y-auto">
+          <Outlet />
+        </main>
+      </div>
+    </div>
+  );
 };
 
 export default DashboarrdLayout;

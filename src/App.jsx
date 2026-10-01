@@ -4,6 +4,7 @@ import { Toaster } from "react-hot-toast";
 import Login from "./pages/Login";
 import Drive from "./pages/Drive";
 import ProtectedRoute from "./components/ui/auth/ProtectedRoute";
+import DashboarrdLayout from "./components/layout/DashboarrdLayout";
 
 const App = () => {
   return (
@@ -15,7 +16,9 @@ const App = () => {
 
         {/* private route */}
         <Route element={<ProtectedRoute />}>
-          <Route path="/" element={<Drive />} />
+          <Route element={<DashboarrdLayout />}>
+            <Route path="/" element={<Drive />} />
+          </Route>
         </Route>
 
         <Route element={<Navigate to="/" replace />} path="*" />
