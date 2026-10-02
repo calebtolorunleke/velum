@@ -2,17 +2,22 @@ import { useApp } from "@/context/AppContext";
 import {
   FolderPlusIcon,
   HardDriveIcon,
+  HardDriveUploadIcon,
   PlusIcon,
   Trash2Icon,
-  UploadIcon,
   UsersIcon,
   XIcon,
 } from "lucide-react";
 import React, { useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Button } from "@/components/ui/Button";
+import { Dropdown, DropdownItem } from "../ui/Dropdown";
 
-const Sidebar = ({ onCreateFolderClick, isMobileOpen, setIsMobileOpen }) => {
+const Sidebar = ({
+  onCreateFolderClick,
+  isMobileOpen,
+  setIsMobileOpen,
+  isUploading,
+}) => {
   const { user } = useApp();
   const location = useLocation();
   const fileInputRef = useRef(null);
@@ -62,13 +67,18 @@ const Sidebar = ({ onCreateFolderClick, isMobileOpen, setIsMobileOpen }) => {
         }`}
       >
         <div className="p-4 space-y-6">
-          {/* Header & Mobile Close */}
+          {/* Header & Brand */}
           <div className="flex items-center justify-between px-2 pt-2">
-            <Link to="/" className="flex items-center gap-2.5">
-              <img src="/logo.svg" alt="Velum logo" className="h-7 w-auto" />
-              <span className="text-2xl font-medium uppercase tracking-wide text-zinc-900">
-                Velum
-              </span>
+            <Link to="/" className="flex items-center gap-3">
+              <img src="/logo.svg" alt="Velum Logo" className="h-8 w-auto" />
+              <div>
+                <h1 className="text-xl font-medium uppercase tracking-wide text-zinc-900">
+                  Velum
+                </h1>
+                <p className="text-[10px] text-[#8C7A6B] tracking-wider font-semibold uppercase">
+                  Cloud Storage
+                </p>
+              </div>
             </Link>
 
             <button
@@ -80,8 +90,8 @@ const Sidebar = ({ onCreateFolderClick, isMobileOpen, setIsMobileOpen }) => {
             </button>
           </div>
 
-          {/* Action Buttons */}
-          <div className="space-y-2 pt-2">
+          {/* Action Area */}
+          <div className="pt-2">
             <input
               type="file"
               ref={fileInputRef}
@@ -90,22 +100,30 @@ const Sidebar = ({ onCreateFolderClick, isMobileOpen, setIsMobileOpen }) => {
               multiple
             />
 
-            <Button
-              onClick={() => fileInputRef.current?.click()}
-              className="w-full justify-start gap-2.5 bg-[#C49A6C] hover:bg-[#A87E52] text-white shadow-sm transition-all"
+            <Dropdown
+              trigger={
+                <button
+                  type="button"
+                  disabled={isUploading}
+                  className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-[#C49A6C] hover:bg-[#A87E52] text-white font-medium text-sm rounded-lg shadow-sm transition-all disabled:opacity-50 cursor-pointer"
+                >
+                  <PlusIcon className="size-5" />
+                  <span>New item</span>
+                </button>
+              }
+              align="left"
+              className="w-48"
             >
-              <UploadIcon className="size-4" />
-              <span>Upload File</span>
-            </Button>
-
-            <Button
-              variant="outline"
-              onClick={onCreateFolderClick}
-              className="w-full justify-start gap-2.5 border-[#E5DEC9] bg-white text-[#2B211B] hover:bg-[#F4EFE6] transition-all"
-            >
-              <FolderPlusIcon className="size-4 text-[#C49A6C]" />
-              <span>New Folder</span>
-            </Button>
+              <DropdownItem
+                icon={HardDriveUploadIcon}
+                onClick={() => fileInputRef.current?.click()}
+              >
+                Upload Files
+              </DropdownItem>
+              <DropdownItem icon={FolderPlusIcon} onClick={onCreateFolderClick}>
+                New Folder
+              </DropdownItem>
+            </Dropdown>
           </div>
 
           {/* Navigation Items */}
