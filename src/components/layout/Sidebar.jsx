@@ -110,6 +110,7 @@ const Sidebar = ({
                   <PlusIcon className="size-5" />
                   <span>New item</span>
                   <span>New item</span>
+                  <span>New item</span>
                 </button>
               }
               align="left"
