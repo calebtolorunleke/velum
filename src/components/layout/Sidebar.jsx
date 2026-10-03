@@ -11,6 +11,7 @@ import {
 import React, { useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Dropdown, DropdownItem } from "../ui/Dropdown";
+import { ProgressBar } from "../ui/ProgressBar";
 
 const Sidebar = ({
   onCreateFolderClick,
@@ -130,7 +131,11 @@ const Sidebar = ({
           <nav className="space-y-1 pt-2">
             {navItems.map((item) => {
               const Icon = item.icon;
-              const isActive = location.pathname === item.path;
+              const isActive =
+                item.path === "/"
+                  ? location.pathname === "/" ||
+                    location.pathname.startsWith("/drive")
+                  : location.pathname === item.path;
 
               return (
                 <Link
