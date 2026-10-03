@@ -73,10 +73,12 @@ const Header = ({ onMobileMenuToggle }) => {
             onChange={(e) => setSortBy(e.target.value)}
             className="appearance-none rounded-lg border border-[#E5DEC9]/80 bg-white py-2 pl-9 pr-8 text-xs font-medium text-[#2B211B] shadow-sm transition-colors focus:border-[#C49A6C] focus:outline-none"
           >
-            <option value="date">Sort by Date</option>
-            <option value="name">Sort by Name</option>
-            <option value="size">Sort by Size</option>
-            <option value="type">Sort by Type</option>
+            <option value="date">Name (A-Z)</option>
+            <option value="name">Name (Z-A)</option>
+            <option value="size">Date (Newest first)</option>
+            <option value="type">Date (Oldest first)</option>
+            <option value="type">Size (Largest first)</option>
+            <option value="type">Size (Smallest first)</option>
           </select>
           <ChevronDown className="pointer-events-none absolute right-2.5 size-3.5 text-[#8C7A6B]" />
         </div>

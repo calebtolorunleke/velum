@@ -8,7 +8,7 @@ const DashboardLayout = () => {
   const [isCreateFolderOpen, setIsCreateFolderOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-[#FDFBF7] text-zinc-900 flex">
+    <div className="min-h-screen bg-[#FDFBF7] text-[#2B211B] flex">
       {/* Sidebar Navigation */}
       <Sidebar
         isMobileOpen={isMobileOpen}
