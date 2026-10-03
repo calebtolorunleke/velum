@@ -17,7 +17,7 @@ const DashboardLayout = () => {
       />
 
       {/* Main Content Workspace */}
-      <div className="flex-1 flex flex-col md:pl-64">
+      <div className="flex-1 flex flex-col">
         {/* Header Placeholder */}
         <Header onMobileMenuToggle={() => setIsMobileOpen(!isMobileOpen)} />
 

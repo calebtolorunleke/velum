@@ -30,7 +30,7 @@ const Header = ({ onMobileMenuToggle }) => {
   return (
     <header className="sticky top-0 z-30 flex h-16 items-center justify-between gap-4 border-b border-[#E5DEC9]/60 bg-white/80 px-4 backdrop-blur-md sm:px-6">
       {/* Left Section: Mobile Toggle & Search Bar */}
-      <div className="flex flex-1 items-center gap-3 md:gap-4">
+      <div className="flex flex-1 items-center gap-3 md:gap-4 w-full">
         {/* Mobile menu button */}
         <button
           type="button"
