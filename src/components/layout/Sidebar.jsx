@@ -112,6 +112,8 @@ const Sidebar = ({
                   <span>New item</span>
                   <span>New item</span>
                   <span>New item</span>
+                  <span>New item</span>
+                  <span>New item</span>
                 </button>
               }
               align="left"
