@@ -1,6 +1,6 @@
 import { useApp } from "@/context/AppContext";
 import { toast } from "react-hot-toast";
-import api from "@/api/axios";
+import api from "@/config/api";
 
 /**
  * Helper to determine if an item is a folder regardless of structure

@@ -1,4 +1,7 @@
+import React, { useRef } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { useApp } from "@/context/AppContext";
+import { useDrive } from "@/hooks/useDrive";
 import {
   FolderPlusIcon,
   HardDriveIcon,
@@ -8,18 +11,11 @@ import {
   UsersIcon,
   XIcon,
 } from "lucide-react";
-import React, { useRef } from "react";
-import { Link, useLocation } from "react-router-dom";
 import { Dropdown, DropdownItem } from "../ui/Dropdown";
-import { ProgressBar } from "../ui/ProgressBar";
 
-const Sidebar = ({
-  onCreateFolderClick,
-  isMobileOpen,
-  setIsMobileOpen,
-  isUploading,
-}) => {
+const Sidebar = ({ onCreateFolderClick, isMobileOpen, setIsMobileOpen }) => {
   const { user } = useApp();
+  const { isUploading, uploadFiles } = useDrive();
   const location = useLocation();
   const fileInputRef = useRef(null);
 
@@ -29,6 +25,13 @@ const Sidebar = ({
     100,
     Math.round((storageUsed / storageLimit) * 100),
   );
+
+  const handleFileSelect = async (e) => {
+    if (e.target.files && e.target.files.length > 0) {
+      await uploadFiles(e.target.files);
+      e.target.value = ""; // Clear input to allow re-uploading the same file if needed
+    }
+  };
 
   const formatSize = (bytes) => {
     if (bytes === 0) return "0 B";
@@ -43,13 +46,6 @@ const Sidebar = ({
     { label: "Shared Files", path: "/shared", icon: UsersIcon },
     { label: "Trash", path: "/trash", icon: Trash2Icon },
   ];
-
-  const handleFileChange = (e) => {
-    const files = e.target.files;
-    if (files && files.length > 0) {
-      // Handle upload logic here
-    }
-  };
 
   return (
     <>
@@ -96,7 +92,7 @@ const Sidebar = ({
             <input
               type="file"
               ref={fileInputRef}
-              onChange={handleFileChange}
+              onChange={handleFileSelect}
               className="hidden"
               multiple
             />
@@ -109,7 +105,7 @@ const Sidebar = ({
                   className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-[#C49A6C] hover:bg-[#A87E52] text-white font-medium text-sm rounded-lg shadow-sm transition-all disabled:opacity-50 cursor-pointer"
                 >
                   <PlusIcon className="size-5" />
-                  <span>New item</span>
+                  <span>{isUploading ? "Uploading..." : "New item"}</span>
                 </button>
               }
               align="left"
