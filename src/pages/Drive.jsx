@@ -1,3 +1,4 @@
+import FileGrid from "@/components/files/FileGrid";
 import Breadcrumbs from "@/components/layout/Breadcrums";
 import React from "react";
 
@@ -9,7 +10,7 @@ const Drive = () => {
       <Breadcrumbs />
 
       {/* folder & files  */}
-      <
+      <FileGrid />
     </div>
   );
 };
