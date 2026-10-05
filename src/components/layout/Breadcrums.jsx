@@ -6,6 +6,13 @@ import { ChevronRight, HardDrive } from "lucide-react";
 const Breadcrumbs = () => {
   const { breadcrumbs = [] } = useApp();
 
+  // Filter out any root breadcrumb that matches "My Drive" or "Drive" to prevent duplicate rendering
+  const folderTrail = breadcrumbs.filter(
+    (crumb) =>
+      crumb.name?.toLowerCase() !== "my drive" &&
+      crumb.name?.toLowerCase() !== "drive",
+  );
+
   return (
     <nav
       aria-label="Breadcrumb"
@@ -21,8 +28,8 @@ const Breadcrumbs = () => {
       </Link>
 
       {/* Dynamic Folder Trail */}
-      {breadcrumbs.map((crumb, index) => {
-        const isLast = index === breadcrumbs.length - 1;
+      {folderTrail.map((crumb, index) => {
+        const isLast = index === folderTrail.length - 1;
         const folderId = crumb._id || crumb.id;
 
         return (
