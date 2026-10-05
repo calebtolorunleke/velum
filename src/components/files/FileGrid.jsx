@@ -2,6 +2,7 @@ import { useApp } from "@/context/AppContext";
 import React from "react";
 import { Spinner } from "../ui/Spinner";
 import { EmptyState } from "../ui/EmptyState";
+import {}
 
 const FileGrid = ({
   onFolderClick,
@@ -37,7 +38,11 @@ const FileGrid = ({
           <h3 className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">
             Folders
           </h3>
-          <div className=""></div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+{folders.map((folder)=>(
+    <FolderCard key/>
+))}
+          </div>
         </div>
       )}
 
