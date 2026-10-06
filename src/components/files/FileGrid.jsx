@@ -3,6 +3,7 @@ import React from "react";
 import { Spinner } from "../ui/Spinner";
 import { EmptyState } from "../ui/EmptyState";
 import FolderCard from "../folders/FolderCard";
+import FileCard from "./FileCard";
 
 const FileGrid = ({
   onFolderClick,
@@ -68,10 +69,10 @@ const FileGrid = ({
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {files.map((file) => (
-              <FolderCard
+              <FileCard
                 key={file._id || file.id}
                 file={file}
-                onClick={onPreviewFile}
+                onPreview={onPreviewFile}
                 onShare={(item) => onShareItem({ ...item, item_type: "file" })}
                 onRename={(item) =>
                   onRenameItem({ ...item, item_type: "file" })

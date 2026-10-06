@@ -88,10 +88,10 @@ export const AppProvider = ({ children }) => {
     }
   };
 
+  // AppContext.jsx
   const fetchDriveContent = useCallback(
-    async (folderId = currentFolderId, search = searchQuery, sort = sortBy) => {
+    async (folderId = null, search = searchQuery, sort = sortBy) => {
       if (!user) return;
-
       setIsDriveLoading(true);
       try {
         const parentParam = folderId || "null";
@@ -112,9 +112,8 @@ export const AppProvider = ({ children }) => {
         setIsDriveLoading(false);
       }
     },
-    [user, currentFolderId, searchQuery, sortBy],
+    [user, searchQuery, sortBy], // Removed currentFolderId
   );
-
   const value = {
     user,
     setUser,
