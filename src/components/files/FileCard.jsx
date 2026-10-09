@@ -50,6 +50,8 @@ const FileCard = ({ file, onPreview, onShare, onRename, onMove, onDelete }) => {
           <span>{formatDate(file?.created_at)}</span>
           <span>{formatDate(file?.created_at)}</span>
           <span>{formatDate(file?.created_at)}</span>
+          <span>{formatDate(file?.created_at)}</span>
+          <span>{formatDate(file?.created_at)}</span>
         </div>
       </div>
     </div>
