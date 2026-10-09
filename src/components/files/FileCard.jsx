@@ -46,8 +46,6 @@ const FileCard = ({ file, onPreview, onShare, onRename, onMove, onDelete }) => {
         <div className="mt-1 flex items-center justify-between text-[11px] text-slate-500">
           <span>{file?.size ? formatBytes(file.size) : "0 B"}</span>
           <span>{formatDate(file?.created_at)}</span>
-          <span>{formatDate(file?.created_at)}</span>
-          <span>{formatDate(file?.created_at)}</span>
         </div>
       </div>
     </div>
