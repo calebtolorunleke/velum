@@ -47,6 +47,7 @@ const FileCard = ({ file, onPreview, onShare, onRename, onMove, onDelete }) => {
           <span>{file?.size ? formatBytes(file.size) : "0 B"}</span>
           <span>{formatDate(file?.created_at)}</span>
           <span>{formatDate(file?.created_at)}</span>
+          <span>{formatDate(file?.created_at)}</span>
         </div>
       </div>
     </div>
