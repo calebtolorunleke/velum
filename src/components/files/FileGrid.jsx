@@ -20,6 +20,7 @@ const FileGrid = ({
       <div className="py-20 flex flex-col items-center justify-center gap-3 text-[#8C7A6B]">
         <Spinner size="lg" className="text-[#C49A6C]" />
         <p className="text-sm font-semibold">Loading items...</p>
+        <p className="text-sm font-semibold">Loading items...</p>
       </div>
     );
   }
