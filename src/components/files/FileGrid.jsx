@@ -21,10 +21,7 @@ const FileGrid = ({
         <Spinner size="lg" className="text-[#C49A6C]" />
         <p className="text-sm font-semibold">Loading items...</p>
         <p className="text-sm font-semibold">Loading items...</p>
-        <p className="text-sm font-semibold">
-          Loading i <p className="text-sm font-semibold">Loading items...</p>
-          ems...
-        </p>
+        <p className="text-sm font-semibold">Loading items...</p>
       </div>
     );
   }
