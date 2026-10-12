@@ -45,9 +45,16 @@ export const AppProvider = ({ children }) => {
     }
   }, []);
 
+  // useEffect(() => {
+  //   refreshUser().finally(() => setIsLoading(false));
+  // }, [refreshUser]);
+
+  // AppContext.jsx - Keep ONLY this single useEffect for initial load/user changes
   useEffect(() => {
-    refreshUser().finally(() => setIsLoading(false));
-  }, [refreshUser]);
+    if (user) {
+      fetchDriveContent(currentFolderId);
+    }
+  }, [user]); // Only run when user loads/logs in
 
   // auth action helper
   const authAction = async (requestFn, successMsg, errorFallback) => {
@@ -88,10 +95,41 @@ export const AppProvider = ({ children }) => {
     }
   };
 
-  // AppContext.jsx
+  // // AppContext.jsx
+  // const fetchDriveContent = useCallback(
+  //   async (folderId = null, search = searchQuery, sort = sortBy) => {
+  //     if (!user) return;
+  //     setIsDriveLoading(true);
+  //     try {
+  //       const parentParam = folderId || "null";
+  //       const [folderRes, fileRes, detailRes] = await Promise.all([
+  //         api.get("/api/folders", { params: { parent_id: parentParam } }),
+  //         api.get("/api/files", {
+  //           params: { folder_id: parentParam, search, sort },
+  //         }),
+  //         folderId ? api.get(`/api/folders/${folderId}`) : null,
+  //       ]);
+
+  //       setFolders(folderRes.data.folders);
+  //       setFiles(fileRes.data.files);
+  //       setBreadcrumbs(detailRes?.data?.breadcrumbs || ROOT_BREADCRUMB);
+  //     } catch (error) {
+  //       toast.error("Error loading drive contents");
+  //     } finally {
+  //       setIsDriveLoading(false);
+  //     }
+  //   },
+  //   [user, searchQuery, sortBy], // Removed currentFolderId
+  // );
+
   const fetchDriveContent = useCallback(
     async (folderId = null, search = searchQuery, sort = sortBy) => {
-      if (!user) return;
+      // Do not block rendering if user is not loaded yet; just clear loading state
+      if (!user) {
+        setIsDriveLoading(false);
+        return;
+      }
+
       setIsDriveLoading(true);
       try {
         const parentParam = folderId || "null";
@@ -103,17 +141,23 @@ export const AppProvider = ({ children }) => {
           folderId ? api.get(`/api/folders/${folderId}`) : null,
         ]);
 
-        setFolders(folderRes.data.folders);
-        setFiles(fileRes.data.files);
+        setFolders(folderRes.data.folders || []);
+        setFiles(fileRes.data.files || []);
         setBreadcrumbs(detailRes?.data?.breadcrumbs || ROOT_BREADCRUMB);
       } catch (error) {
+        console.error("Drive content load error:", error);
+        // Fallback to empty arrays so UI doesn't crash
+        setFolders([]);
+        setFiles([]);
         toast.error("Error loading drive contents");
       } finally {
+        // CRITICAL: Always guarantee loading turns off
         setIsDriveLoading(false);
       }
     },
-    [user, searchQuery, sortBy], // Removed currentFolderId
+    [user, searchQuery, sortBy],
   );
+
   const value = {
     user,
     setUser,
