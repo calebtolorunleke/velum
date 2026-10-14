@@ -20,6 +20,7 @@ const FolderCard = ({
         <div className="p-2.5 rounded-xl bg-[#F8F4EF] text-[#C49A6C] shrink-0 border border-[#EFE8DF]">
           <LucideFolder className="size-6 fill-[#C49A6C]/20" />
           <LucideFolder className="size-6 fill-[#C49A6C]/20" />
+          <LucideFolder className="size-6 fill-[#C49A6C]/20" />
         </div>
 
         {/* Folder Name */}
