@@ -21,6 +21,7 @@ const FolderCard = ({
           <LucideFolder className="size-6 fill-[#C49A6C]/20" />
           <LucideFolder className="size-6 fill-[#C49A6C]/20" />
           <LucideFolder className="size-6 fill-[#C49A6C]/20" />
+          <LucideFolder className="size-6 fill-[#C49A6C]/20" />
         </div>
 
         {/* Folder Name */}
