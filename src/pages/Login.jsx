@@ -38,7 +38,6 @@ const Login = ({ mode = "login" }) => {
 
     if (success) {
       navigate("/");
-      navigate("/");
     }
   };
 
